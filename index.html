@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio - Decoração de Festas</title>
+    <style>
+        /* Reset e Estilos Globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: #f9f5f0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Cabeçalho */
+
+        .imagem-circular {
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        object-fit: cover; /* garante que a imagem cubra todo o espaço */
+        }
+
+        .imagem-circular2 {
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        place-items: center;
+        object-fit: cover; /* garante que a imagem cubra todo o espaço */
+        }
+
+        header {
+            background: linear-gradient(135deg, #8a375a 0%, #8a375a 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 1.0);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Navegação */
+        nav {
+            background-color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav li {
+            margin: 0 1.5rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #8a375a;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #8a375a;
+        }
+        
+        /* Galeria */
+        .gallery {
+            padding: 3rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .gallery h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #8a375a;
+            font-size: 2rem;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-btn {
+            background: white;
+            border: 2px solid #522035;
+            color: #8a375a;
+            padding: 0.5rem 1.5rem;
+            margin: 0.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: #8a375a;
+            color: white;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .portfolio-item img, .portfolio-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            color: white;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-overlay h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Seção de Sobre */
+        .about {
+            background-color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about h2 {
+            color: #8a375a;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        /* Rodapé */
+        footer {
+            background: linear-gradient(135deg, #8a375a 0%, #8a375a 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #8a375a;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="Design sem nome (2).png" alt="Descrição" class="imagem-circular">
+        <h1>DOCE MOMENTO DECORAÇÕES</h1>
+        <p>Transformando sonhos em realidade através de arranjos decorativos únicos para suas festas especiais</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#portfolio">Portfólio</a></li>
+            <li><a href="#about">Sobre Nós</a></li>
+            <li><a href="#contact">Contato</a></li>
+        </ul>
+    </nav>
+    
+    <section id="portfolio" class="gallery">
+        <h2>Nosso Portfólio</h2>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="casamento">Casamentos</button>
+            <button class="filter-btn" data-filter="aniversario">Aniversários</button>
+            <button class="filter-btn" data-filter="corporativo">Eventos Corporativos</button>
+            <button class="filter-btn" data-filter="video">Vídeos</button>
+        </div>
+        
+        <div class="portfolio-grid">
+            <!-- Item 1 -->
+            <div class="portfolio-item" data-category="casamento">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Mesa de casamento decorada">
+                <div class="portfolio-overlay">
+                    <h3>Casamento Clássico</h3>
+                    <p>Decoração em tons de marfim e dourado</p>
+                </div>
+            </div>
+            
+            <!-- Item 2 -->
+            <div class="portfolio-item" data-category="aniversario">
+                <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Festa de aniversário infantil">
+                <div class="portfolio-overlay">
+                    <h3>Aniversário Infantil</h3>
+                    <p>Tema floresta encantada</p>
+                </div>
+            </div>
+            
+            <!-- Item 3 -->
+            <div class="portfolio-item" data-category="corporativo">
+                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Evento corporativo">
+                <div class="portfolio-overlay">
+                    <h3>Lançamento de Produto</h3>
+                    <p>Decoração moderna e clean</p>
+                </div>
+            </div>
+            
+            <!-- Item 4 - Vídeo -->
+            <div class="portfolio-item" data-category="video">
+                <video muted loop>
+                    <source src="https://example.com/decor-video.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos HTML5.
+                </video>
+                <div class="portfolio-overlay">
+                    <h3>Time-lapse Montagem</h3>
+                    <p>Veja como transformamos o espaço</p>
+                </div>
+            </div>
+            
+            <!-- Item 5 -->
+            <div class="portfolio-item" data-category="casamento">
+                <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Casamento na praia">
+                <div class="portfolio-overlay">
+                    <h3>Casamento na Praia</h3>
+                    <p>Tema tropical com tons de azul e branco</p>
+                </div>
+            </div>
+            
+            <!-- Item 6 -->
+            <div class="portfolio-item" data-category="aniversario">
+                <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Festa de 15 anos">
+                <div class="portfolio-overlay">
+                    <h3>Festa de 15 Anos</h3>
+                    <p>Decoração glamourosa em tons de rosa e ouro</p>
+                </div>
+            </div>
+            
+            <!-- Item 7 - Vídeo -->
+            <div class="portfolio-item" data-category="video">
+                <video muted loop>
+                    <source src="https://example.com/centerpiece-video.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos HTML5.
+                </video>
+                <div class="portfolio-overlay">
+                    <h3>Arranjos de Mesa</h3>
+                    <p>Detalhes de nossos centros de mesa</p>
+                </div>
+            </div>
+            
+            <!-- Item 8 -->
+            <div class="portfolio-item" data-category="corporativo">
+                <img src="https://images.unsplash.com/photo-1492681290082-e932832941e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Conferência corporativa">
+                <div class="portfolio-overlay">
+                    <h3>Conferência Anual</h3>
+                    <p>Decoração profissional e sofisticada</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="about" class="about">
+        <div class="about-container">
+            <h2>Sobre Nós</h2>
+            <p>Na Doce Momento Decorações, transformamos seus eventos em momentos inesquecíveis! Especializados em casamentos, aniversários, chás de bebê, festas corporativas e muito mais, criamos ambientes encantadores que refletem sua personalidade. Com design exclusivo, atenção aos detalhes e materiais de qualidade, garantimos uma decoração que impressiona e emociona.</p>
+            <p>Nossa equipe dedicada cuida de tudo, desde o planejamento até a execução, para que você possa aproveitar cada instante com tranquilidade. Conte conosco para tornar sua celebração única e memorável!</p>
+            <p>✨ Seu sonho, nossa inspiração! ✨</p>
+        </div>
+    </section>
+    
+    <footer id="contact">
+        <h3>Entre em Contato</h3>
+        <p>email: docemomento.eusamar@gmail.com</p>
+
+        <div style="text-align: center;">
+            <img src="https://as2.ftcdn.net/jpg/03/16/74/65/1000_F_316746510_yotsjNGcv7fzmrmTkApIinQaR0TfpBzd.jpg" alt="Imagem centralizada">
+          </div>
+        
+        <p> <img src="https://as2.ftcdn.net/jpg/03/16/74/65/1000_F_316746510_yotsjNGcv7fzmrmTkApIinQaR0TfpBzd.jpg" alt="Descrição" class="imagem-circular2"> telefone: (12) 93456-7890</p>
+        
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+        </div>
+        
+        <p>&copy; 2023 Arte & Encanto Decor. Todos os direitos reservados.</p>
+    </footer>
+    
+    <!-- Font Awesome para ícones -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <!-- JavaScript para filtro da galeria -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove a classe active de todos os botões
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Adiciona a classe active ao botão clicado
+                    button.classList.add('active');
+                    
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    portfolioItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
